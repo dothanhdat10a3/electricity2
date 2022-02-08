@@ -8,7 +8,8 @@ np.random.seed(42)
 
 all_tuabin = np.array([1, 2, 3, 4])
 data_path='data/newData.xlsx'
-num_val=200
+num_val=240
+num_test=500
 
 # Function to define the inputs. Different depending on the model and turbine
 def preprocess_features(wind_farm_dataframe):
@@ -56,8 +57,13 @@ all_data = np.concatenate((examples, targets), axis=-1).astype(np.float32)
 # print(f'The max of power is: {max_targets}\n\n')
 
 val_indices = np.random.choice(all_data.shape[0], size=num_val, replace=False)
-train_indices = [i for i in range(len(all_data)) if i not in val_indices]
-test_indices = range(131, 181)
+
+mid = [i for i in range(len(all_data)) if i not in val_indices]
+mid_array = np.array(mid)
+test_indices = np.random.choice(mid_array.shape[0], size=num_test, replace=False)
+
+train_indices = [i for i in range(len(mid_array)) if i not in test_indices]
+
 
 all_test = all_data[test_indices]
 test_examples = all_test[:, :len(all_tuabin)]
