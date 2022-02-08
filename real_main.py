@@ -11,20 +11,20 @@ from angular_grad import AngularGrad
 # tf.debugging.set_log_device_placement(True)
 
 # parameter-----------------------------------------------------------------------------------------------------------------------------
-num_epochs = 10000
+num_epochs = 1000
 batch_size = 32
-path_saver = '/content/drive/Shareddrives/newpro112233/electricity/weights/'
-name_saver = 'model_5_tuabin.h5'
+path_saver = '/content/drive/MyDrive/weights8Feb/'
+name_saver = 'model_5_tuabin_a1.h5'
 
 # Define the Keras TensorBoard callback.
-logdir="/content/drive/Shareddrives/newpro112233/electricity/logs/fit/" + datetime.now().strftime("%Y%m%d-%H%M%S")
+logdir="/content/drive/MyDrive/weights8Feb/fit/" + datetime.now().strftime("%Y%m%d-%H%M%S")
 tensorboard_callback = keras.callbacks.TensorBoard(log_dir=logdir)
 
 # callback = tf.keras.callbacks.EarlyStopping(monitor='loss', patience=3)
 def train(data=None, labels=None, val_data=None, val_labels=None, network=None, num_epochs=None, batch_size=None, show_metric=True, name_saver=None):
   model = network()
   # 
-  model.load_weights('/content/drive/Shareddrives/newpro112233/electricity/weights/model_5_tuabin_next.h5')
+  # model.load_weights('/content/drive/MyDrive/weights8Feb/model_5_tuabin_4.h5')
   model.compile(loss="mean_squared_error",
                 metrics=[tf.keras.metrics.Precision()],
                 optimizer=AngularGrad())
