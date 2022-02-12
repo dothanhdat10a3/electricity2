@@ -13,22 +13,22 @@ from angular_grad import AngularGrad
 # parameter-----------------------------------------------------------------------------------------------------------------------------
 num_epochs = 10000
 batch_size = 32
-path_saver = '/content/drive/MyDrive/weightsFeb10/'
+path_saver = '/content/drive/MyDrive/weightsFeb12/'
 name_saver = 'model_5_tuabin_1.h5'
 
 # Define the Keras TensorBoard callback.
-logdir="/content/drive/MyDrive/weightsFeb10/fit/" + datetime.now().strftime("%Y%m%d-%H%M%S")
+logdir="/content/drive/MyDrive/weightsFeb12/fit/" + datetime.now().strftime("%Y%m%d-%H%M%S")
 tensorboard_callback = keras.callbacks.TensorBoard(log_dir=logdir)
 
 # callback = tf.keras.callbacks.EarlyStopping(monitor='loss', patience=3)
 def train(data=None, labels=None, val_data=None, val_labels=None, network=None, num_epochs=None, batch_size=None, show_metric=True, name_saver=None):
   model = network()
   # 
-  # model.load_weights('/content/drive/MyDrive/weightsFeb10/model_5_tuabin_1.h5')
+  # model.load_weights('/content/drive/MyDrive/weightsFeb12/model_5_tuabin_1.h5')
   model.compile(loss="mean_squared_error",
-                metrics=[tf.keras.metrics.Precision()],
+                metrics=['accuracy'],
                 optimizer=AngularGrad())
-
+# metrics=[tf.keras.metrics.Precision()]
   history = model.fit(x=data, y=labels, epochs=num_epochs,
                      validation_data=(val_data, val_labels),
                      callbacks=[tensorboard_callback])

@@ -8,7 +8,7 @@ from keras.models import load_model
 
 model = network()
 model.summary()
-model.load_weights('/content/drive/MyDrive/weightsFeb10/model_5_tuabin_2.h5') 
+model.load_weights('/content/drive/MyDrive/weightsFeb12/model_5_tuabin_2.h5') 
 
 y_pred = model.predict(test_examples).astype(np.float32)
 matrix = test_targets
