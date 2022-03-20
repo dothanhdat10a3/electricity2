@@ -4,13 +4,13 @@ import numpy as np
 from utils.data_real_loader import training_examples, training_targets, validation_examples, validation_targets
 from nn.real_nets import network
 from datetime import datetime
-import keras
+from tensorflow import keras
 from angular_grad import AngularGrad
 
-# active GPU--------------------------------------------------------------------------------------------------------------------------
+# active GPU---------------------------------------------------------------
 # tf.debugging.set_log_device_placement(True)
 
-# parameter-----------------------------------------------------------------------------------------------------------------------------
+# parameter----------------------------------------------------------------
 num_epochs = 10000
 batch_size = 32
 path_saver = '/content/drive/MyDrive/weightsFeb12/'
@@ -23,12 +23,12 @@ tensorboard_callback = keras.callbacks.TensorBoard(log_dir=logdir)
 # callback = tf.keras.callbacks.EarlyStopping(monitor='loss', patience=3)
 def train(data=None, labels=None, val_data=None, val_labels=None, network=None, num_epochs=None, batch_size=None, show_metric=True, name_saver=None):
   model = network()
-  # 
+
   # model.load_weights('/content/drive/MyDrive/weightsFeb12/model_5_tuabin_1.h5')
   model.compile(loss="mean_squared_error",
                 metrics=['accuracy'],
                 optimizer=AngularGrad())
-# metrics=[tf.keras.metrics.Precision()]
+
   history = model.fit(x=data, y=labels, epochs=num_epochs,
                      validation_data=(val_data, val_labels),
                      callbacks=[tensorboard_callback])

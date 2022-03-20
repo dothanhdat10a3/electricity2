@@ -6,19 +6,18 @@ import keras.backend as K
 import xlrd
 np.random.seed(42)
 
-all_tuabin = np.array([ 2, 3, 4, 5])
+all_turbine = np.array([ 2, 3, 4, 5])
 data_path='data/dataFeb10.xlsx'
 num_val=240
 # num_test=500
 
 # Function to define the inputs. Different depending on the model and turbine
 def preprocess_features(wind_farm_dataframe):
-    selected_features = wind_farm_dataframe[1:, all_tuabin]
+    selected_features = wind_farm_dataframe[1:, all_turbine]
     return np.array(selected_features)
 
-
 def preprocess_targets(wind_farm_dataframe):  
-    selected_targets = wind_farm_dataframe[1:, all_tuabin+8]
+    selected_targets = wind_farm_dataframe[1:, all_turbine+8]
     return np.array(selected_targets)
 
 # Function used to construct the columns used by the program with the data
@@ -56,7 +55,6 @@ all_data = np.concatenate((examples, targets), axis=-1).astype(np.float32)
 # print(f'The min of power is: {min_targets}')
 # print(f'The max of power is: {max_targets}\n\n')
 
-
 test_indices = range(2686,2974)
 
 mid = [i for i in range(len(all_data)) if i not in test_indices]
@@ -64,7 +62,6 @@ mid_array = np.array(mid)
 val_indices = np.random.choice(mid_array.shape[0], size=num_val, replace=False)
 
 train_indices = [i for i in range(len(mid_array)) if i not in val_indices]
-
 
 # val_indices = np.random.choice(all_data.shape[0], size=num_val, replace=False)
 
@@ -74,15 +71,16 @@ train_indices = [i for i in range(len(mid_array)) if i not in val_indices]
 
 # train_indices = [i for i in range(len(mid_array)) if i not in test_indices]
 
-
 all_test = all_data[test_indices]
-test_examples = all_test[:, :len(all_tuabin)]
-test_targets = all_test[:, len(all_tuabin):]
+test_examples = all_test[:, :len(all_turbine)]
+test_targets = all_test[:, len(all_turbine):]
 
 all_train = all_data[train_indices]
-training_examples = all_train[:, :len(all_tuabin)]
-training_targets = all_train[:, len(all_tuabin):]
+training_examples = all_train[:, :len(all_turbine)]
+training_targets = all_train[:, len(all_turbine):]
 
 all_validation = all_data[val_indices]
-validation_examples = all_validation[:, :len(all_tuabin)]
-validation_targets = all_validation[:, len(all_tuabin):]
+validation_examples = all_validation[:, :len(all_turbine)]
+validation_targets = all_validation[:, len(all_turbine):]
+
+

@@ -11,14 +11,15 @@ model.summary()
 model.load_weights('/content/drive/MyDrive/weightsFeb12/model_5_tuabin_2.h5') 
 
 y_pred = model.predict(test_examples).astype(np.float32)
-matrix = test_targets
+real_data = test_targets
 
 print(f'\nThe prediction powers are \n{y_pred}\n')
 print('\nThe true powers are:')
 print(test_targets)
 
-# df1 = pd.DataFrame(matrix)
-# df1.to_excel('predict.xlsx')
+# Export files
+df1 = pd.DataFrame(y_pred)
+df1.to_excel('predict.xlsx')
 
-# df2 = pd.DataFrame(matrix)
-# df2.to_excel('realData.xlsx')
+df2 = pd.DataFrame(real_data)
+df2.to_excel('realData.xlsx')

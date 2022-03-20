@@ -1,0 +1,42 @@
+from glob import glob
+import pandas as pd
+from matplotlib import pyplot as plt
+
+pd.set_option('display.max_columns', 5)
+dataRaw = pd.read_csv('data112.csv')
+data = dataRaw.copy()
+
+# print(data.describe())
+
+    # List of turbines to be handled
+wind_speed_turbine = [23, 24, 25, 26]
+
+    # Create a number array with the indices of the columns
+def column(column_index):
+    new_list = []
+    global wind_speed_turbine
+    for column in wind_speed_turbine:
+        new_ column_index = column + column_index
+        new_list.append(new_ column_index)
+    return new_list
+
+    # This is a trend line from data
+def y_value(x):
+    return x*555.14 - 2164 - 500
+
+    # Get rid of outliners
+def preprocess():
+    global wind_speed_turbine
+    for tuabin in wind_speed_turbine:
+        ws = 'WS' + str(tuabin)
+        wp = 'WP' + str(tuabin)
+        data.drop(data[(data[ws] < 4) | (data[wp] < 200) | (data[ws] > 14)].index, inplace=True)
+        data.drop(data.loc[(data[wp] < 3500) & (y_value(data[ws]) > data[wp])].index, inplace=True)    
+    data_preprocessed = data.iloc[:,[0,] + wind_speed_turbine + column(26) + column(52)]
+    return data_preprocessed
+
+    # Export data into csv or excel files
+def export_data(name):
+    if name[-1] == 'x':
+        preprocess().to_excel(name)
+
