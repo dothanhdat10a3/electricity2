@@ -39,4 +39,47 @@ def preprocess():
 def export_data(name):
     if name[-1] == 'x':
         preprocess().to_excel(name)
+    elif name[-1] == 'v':
+        preprocess().to_csv(name,sep='\t')
+    else:
+        print('Wrong name!\nExport to excel --> argument: <filename>.xlsx\nExport to csv   --> argument: <filename>.csv')
+
+# export_data('dataFeb10.xlsx')
+
+    # Display the scatter graph 
+def scatterAfterProcessing(n):
+    ws = 'WS' + str(n)
+    wp = 'WP' + str(n)
+    data_test = preprocess().loc[:, [ws, wp]]
+    plt.style.use('seaborn-whitegrid')
+    plt.rcParams['scatter.marker'] = 'o'
+    plt.rcParams['figure.facecolor'] = 'white'
+    plt.rcParams['axes.facecolor'] = 'white'
+    plt.rcParams['font.family'] = 'serif'
+    plt.rcParams['font.size'] = 10
+    plt.rcParams['font.weight'] = 'bold'
+    plt.rcParams['text.color'] = 'red'
+    title = 'POWER SCATTER GRAPH WINDTURBINE' + str(n)
+    data_test.plot.scatter(x=ws, y=wp, title=title)
+    plt.show()
+
+# scatterAfterProcessing(26)
+
+def scatterAfterProcessing(n):
+    ws = 'WS' + str(n)
+    wp = 'WP' + str(n)
+    global data
+    plt.style.use('seaborn-whitegrid')
+    plt.rcParams['scatter.marker'] = 'o'
+    plt.rcParams['figure.facecolor'] = 'white'
+    plt.rcParams['axes.facecolor'] = 'white'
+    plt.rcParams['font.family'] = 'serif'
+    plt.rcParams['font.size'] = 10
+    plt.rcParams['font.weight'] = 'bold'
+    plt.rcParams['text.color'] = 'red'
+    title = 'POWER SCATTER GRAPH WINDTUABIN' + str(n)
+    data.plot.scatter(x=ws, y=wp, title=title)
+    plt.show()
+
+# scatterBeforeProcessing(26)
 
